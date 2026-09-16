@@ -173,36 +173,35 @@
   /* ---------- Hero ---------- */
   .hero{
     position:relative;
-    padding-block: 4.5rem 3.5rem;
+    min-height:clamp(440px, 62vh, 660px);
+    display:flex; align-items:flex-end;
+    padding-block: 3rem 3rem;
     overflow:hidden;
+    background: #2a2015 url('hero.png') center 35%/cover no-repeat;
   }
-  .steam{
-    position:absolute; top:-4rem; width:120px; height:260px;
-    filter:blur(28px);
-    opacity:0.35;
-    border-radius:50%;
-    background:radial-gradient(closest-side, var(--ember), transparent 70%);
-    animation: rise 9s ease-in-out infinite;
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(180deg, rgba(20,14,8,0.18) 0%, rgba(20,14,8,0.62) 60%, rgba(16,11,6,0.92) 100%);
   }
-  .steam.s1{left:8%; animation-delay:0s;}
-  .steam.s2{left:38%; opacity:0.22; background:radial-gradient(closest-side, var(--teal), transparent 70%); animation-delay:2.5s;}
-  .steam.s3{right:10%; opacity:0.28; animation-delay:5s;}
-  @keyframes rise{
-    0%,100%{transform:translateY(0) translateX(0);}
-    50%{transform:translateY(-18px) translateX(10px);}
-  }
-  .hero-inner{position:relative; z-index:1; max-width:760px;}
+  .hero-inner{position:relative; z-index:1; max-width:720px;}
+  .hero .eyebrow{color:#f0dfc0;}
+  .hero .eyebrow::before{background:var(--ember);}
   .hero h1{
     font-size:clamp(2.5rem, 4vw + 1.2rem, 4.1rem);
     margin-block:0.5rem 0.9rem;
+    color:#fff8ec;
   }
+  .hero .motto{color:#f0dfc0;}
   .hero-tagline{
-    font-size:1.15rem; color:var(--ink-soft); max-width:56ch;
+    font-size:1.15rem; color:#f4ead8; max-width:58ch;
     margin-bottom:1.75rem;
   }
   .hero-ctas{display:flex; gap:0.9rem; flex-wrap:wrap; align-items:center;}
+  .hero .btn-ghost{border-color:rgba(251,243,229,0.55); color:#fff8ec;}
+  .hero .btn-ghost:hover{border-color:#fff8ec; color:#fff8ec; background:rgba(251,243,229,0.12);}
   .hero-note{
-    margin-top:1rem; font-size:0.85rem; color:var(--ink-soft);
+    margin-top:1rem; font-size:0.85rem; color:#e5d8bd;
     font-family:"JetBrains Mono", monospace;
   }
 
@@ -211,9 +210,23 @@
   .section-head h2{font-size:clamp(1.7rem, 2vw + 1.2rem, 2.4rem); margin-top:0.4rem;}
 
   /* ---------- About ---------- */
-  .about-grid{display:grid; grid-template-columns: minmax(0,1fr); gap:2rem;}
+  .about-grid{
+    display:grid; grid-template-columns: minmax(0,1fr) minmax(240px, 400px);
+    gap:2.5rem; align-items:start;
+  }
   .about p{color:var(--ink-soft); max-width:68ch;}
   .about strong{color:var(--ink);}
+  .about-photo{
+    width:100%; aspect-ratio:4/5; object-fit:cover;
+    border-radius:16px;
+    border:1px solid var(--line);
+    display:block;
+    order:2;
+  }
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;}
+    .about-photo{order:-1; aspect-ratio:16/10;}
+  }
 
   /* ---------- Services (order tickets) ---------- */
   .services-grid{
@@ -253,7 +266,7 @@
   .ticket.diet .tag{background:var(--teal);}
   .ticket.friends .tag{background:var(--plum);}
   .ticket-img{
-    width:100%; aspect-ratio:3/2; object-fit:cover;
+    width:100%; aspect-ratio:4/3; object-fit:cover;
     border-radius:10px; border:1px solid var(--line);
     display:block;
   }
@@ -380,34 +393,32 @@
 </div>
 
 <main>
-  <section class="hero wrap">
-    <div class="steam s1" aria-hidden="true"></div>
-    <div class="steam s2" aria-hidden="true"></div>
-    <div class="steam s3" aria-hidden="true"></div>
-    <div class="hero-inner">
+  <section class="hero">
+    <div class="wrap hero-inner">
       <span class="eyebrow">Cuoco a domicilio</span>
       <h1>Agostino Zara</h1>
       <p class="motto">Ricette buone, sane e fatte con amore.</p>
-      <p class="hero-tagline">Porto la cucina a casa tua: pranzi e cene su misura, grigliate con gli amici, i grandi classici della tradizione e menu settimanali costruiti sul piano del tuo nutrizionista o dietologo.</p>
+      <p class="hero-tagline">Hai voglia di una cena speciale, una grigliata con gli amici o una mano vera con i pasti della settimana — ma zero voglia di fare la spesa, cucinare e poi lavare tutto? Ci penso io, con la stessa cura che metterei per la mia famiglia.</p>
       <p class="hero-note" style="margin-top:0; margin-bottom:1.5rem;">Zona di attività: da Caravate a Varese, Luino, Sesto Calende e Vergiate</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="https://wa.me/393454836611?text=Ciao%20Agostino%2C%20vorrei%20informazioni%20sul%20servizio%20di%20cucina%20a%20domicilio" target="_blank" rel="noopener">Scrivimi su WhatsApp</a>
         <a class="btn btn-ghost" href="https://www.tiktok.com/@biomama95" target="_blank" rel="noopener">Guarda le ricette su TikTok ↗</a>
       </div>
-      <p class="hero-note">Rispondo solo ai messaggi su WhatsApp o TikTok, niente chiamate</p>
+      <p class="hero-note">Primo contatto solo via messaggio, su WhatsApp o TikTok — poi ci si sente anche per telefono, su appuntamento</p>
     </div>
   </section>
 
   <section id="chi-sono" class="about wrap">
-    <div class="section-head">
-      <span class="eyebrow">Chi sono</span>
-      <h2>Un cuoco, non un catering</h2>
-    </div>
     <div class="about-grid">
-      <div class="prose">
-        <p>Cucino professionalmente da oltre un anno e ho alle spalle anche un corso di pasticceria. Mi piace muovermi senza sforzo <strong>dai grandi classici alle contaminazioni più moderne e fusion</strong> — le ricette che preparo davvero le trovi anche sulla mia pagina TikTok.</p>
-        <p>Quando lavoro a casa tua seguo con precisione le ricette e le grammature che mi dai — tue, del tuo nutrizionista o mie — e mi occupo di tutto il resto: <strong>spesa, cottura, porzionamento e riordino della cucina</strong>. Ho un mezzo proprio, quindi la spesa la faccio io: mi viene anticipata prima dell'acquisto, di solito caricando l'importo su una carta prepagata — la mia, oppure (meglio ancora) una tua dedicata alla spesa. Gli eventuali fondi rimasti sulla mia carta a fine collaborazione ti vengono restituiti.</p>
+      <div>
+        <span class="eyebrow">Chi sono</span>
+        <h2 style="margin-top:0.4rem; margin-bottom:1.3rem;">Un cuoco, non un catering</h2>
+        <div class="prose">
+          <p>La cucina per me non è un lavoro come un altro: è la cosa che mi fa perdere la cognizione del tempo. Cucino professionalmente da oltre un anno, ho fatto anche un corso di pasticceria, e mi diverto a spaziare <strong>dai grandi classici della tradizione a contaminazioni più moderne e fusion</strong> — le ricette che preparo davvero le trovi sulla mia pagina TikTok, non sono foto prese da internet.</p>
+          <p>Quando vengo a cucinare a casa tua seguo con precisione le ricette e le grammature che mi dai — tue, del tuo nutrizionista o mie — e mi occupo di tutto il resto: <strong>spesa, cottura, porzionamento e riordino della cucina</strong>, così quando ho finito trovi la cucina come l'avevi lasciata e in tavola solo quello che conta. Ho un mezzo proprio, quindi la spesa la faccio io: mi viene anticipata prima dell'acquisto, di solito caricando l'importo su una carta prepagata — la mia, oppure (meglio ancora) una tua dedicata alla spesa. Gli eventuali fondi rimasti sulla mia carta a fine collaborazione ti vengono restituiti.</p>
+        </div>
       </div>
+      <img class="about-photo" src="gnocchi.png" alt="Gnocchi al burro e salvia impiattati, preparati da Agostino">
     </div>
   </section>
 
@@ -421,28 +432,28 @@
         <span class="tag">Griglia</span>
         <img class="ticket-img" src="bbq.png" alt="Chef alla griglia con carne, pesce e verdure, amici a tavola sullo sfondo">
         <h3>BBQ a domicilio</h3>
-        <p>Griglia, brace e affumicatura nel tuo giardino o in terrazzo: carne, pesce, verdure e salse fatte in casa, per una giornata con gli amici senza pensieri. Barbecue e combustibile (carbone, gas o elettrico) sono a cura tua.</p>
+        <p>Il profumo di brace che arriva dal giardino, gli amici che si radunano intorno alla griglia: carne, pesce, verdure e salse fatte in casa, per una giornata senza pensieri. Barbecue e combustibile (carbone, gas o elettrico) sono a cura tua.</p>
         <div class="ticket-price">da 35 €/persona · min. 4 persone · spesa esclusa</div>
       </article>
       <article class="ticket trad">
         <span class="tag">Tradizione</span>
         <img class="ticket-img" src="tradizione.png" alt="Piatti della tradizione italiana: pasta al ragù, arrosto e crostata">
         <h3>Cucina tradizionale</h3>
-        <p>I grandi classici della cucina italiana e di casa, fatti come si deve: dal primo al dolce, su ordinazione per il pranzo della domenica o una cena importante.</p>
+        <p>Il sugo che sobbolle da ore, l'arrosto che riempie casa di profumo: i grandi classici della cucina italiana e di casa, fatti come si deve, dal primo al dolce — per il pranzo della domenica o una cena importante.</p>
         <div class="ticket-price">da 35 €/persona · spesa esclusa</div>
       </article>
       <article class="ticket diet">
         <span class="tag">Piano nutrizionale</span>
         <img class="ticket-img" src="piano-nutrizionale.png" alt="Meal prep settimanale in contenitori etichettati per giorno, con verdure fresche">
         <h3>Cucina su piano nutrizionale</h3>
-        <p>Ricevo le ricette e i menù settimanali del tuo nutrizionista o dietologo, faccio la spesa secondo il budget concordato, cucino e porziono i pasti in contenitori pronti per tutta la settimana.</p>
+        <p>Meno pensieri, più tempo per te: ricevo le ricette e i menù settimanali del tuo nutrizionista o dietologo, faccio la spesa secondo il budget concordato, cucino e porziono i pasti in contenitori pronti per tutta la settimana.</p>
         <div class="ticket-price">35 €/ora · spesa esclusa</div>
       </article>
       <article class="ticket friends">
         <span class="tag">Convivio</span>
         <img class="ticket-img" src="cene.png" alt="Chef che serve un piatto a tavola durante una cena con amici, tavola imbandita con candele e antipasti">
         <h3>Cene e pranzi tra amici</h3>
-        <p>Organizzi la serata, io porto il menu in tavola: aperitivo, portate e dolce pensati insieme a te, cucinati e serviti direttamente a casa tua.</p>
+        <p>Le risate, il vino versato, le candele accese: tu organizzi la serata, io porto il menu in tavola — aperitivo, portate e dolce pensati insieme a te, cucinati e serviti direttamente a casa tua.</p>
         <div class="ticket-price">da 35 €/persona · min. 4 persone · spesa esclusa</div>
       </article>
     </div>
@@ -505,7 +516,7 @@
         </div>
 
         <div class="receipt-foot">
-          <strong>Spesa alimentare sempre esclusa</strong>, a carico di chi ospita: si anticipa prima dell'acquisto o si rimborsa su scontrino. Per il BBQ, barbecue e combustibile sono a carico del cliente. Tariffe indicative: il preventivo si conferma con un messaggio o una breve chiamata, in base a menu, numero di persone e giorni.<br><br><strong>Pagamento</strong>: per il primo servizio, compenso anticipato al 100%. Dal secondo servizio in poi, acconto del 30% alla conferma e saldo a fine servizio.
+          <strong>Spesa alimentare sempre esclusa</strong>, a carico di chi ospita: si anticipa prima dell'acquisto o si rimborsa su scontrino. Per il BBQ, barbecue e combustibile sono a carico del cliente. Tariffe indicative: il preventivo si conferma dopo un primo scambio di messaggi, in base a menu, numero di persone e giorni.<br><br><strong>Pagamento</strong>: per il primo servizio, compenso anticipato al 100%. Dal secondo servizio in poi, acconto del 30% alla conferma e saldo a fine servizio.
         </div>
       </div>
     </div>
@@ -518,7 +529,7 @@
         <div>
           <span class="eyebrow">Contatti</span>
           <h2>Parliamone</h2>
-          <p class="contact-phone">345 483 6611 · TikTok @biomama95<br>Solo messaggi WhatsApp o TikTok — niente chiamate<br>Zona di attività: da Caravate a Varese, Luino, Sesto Calende e Vergiate</p>
+          <p class="contact-phone">345 483 6611 · TikTok @biomama95<br>Primo contatto solo via messaggio — poi ci si sente anche per telefono, su appuntamento<br>Zona di attività: da Caravate a Varese, Luino, Sesto Calende e Vergiate</p>
         </div>
       </div>
       <div class="contact-actions">
